@@ -52,15 +52,14 @@ private SessionFactory factory = SessionUtil.getFactory();
 	public List<Employee> getAllEmployees() {
 		Transaction transaction = null;
 		List<Employee> Employees = null;
-//		try(Session session = factory.openSession()) {
-	     Session session = factory.openSession();
+		try(Session session = factory.openSession()) {
 	     transaction = session.beginTransaction();
 			Employees = session.createNativeQuery("Select * from Employee",Employee.class).list();
 			transaction.commit();
-////		} catch (Exception e) {
-//			if(transaction != null)
-//				transaction.rollback();
-//		}
+		} catch (Exception e) {
+			if(transaction != null)
+				transaction.rollback();
+		}
 		return Employees;
 	}
 	

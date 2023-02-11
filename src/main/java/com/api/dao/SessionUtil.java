@@ -11,6 +11,7 @@ import java.util.Properties;
 import org.hibernate.cfg.Environment;
 import org.hibernate.service.ServiceRegistry;
 
+import com.api.entity.Book;
 import com.api.entity.Employee;
 
 public class SessionUtil {
@@ -24,7 +25,7 @@ public class SessionUtil {
 			
 			Properties settings = new Properties();
 			settings.put(Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
-			settings.put(Environment.URL, "jdbc:mysql://localhost:3306/rest");
+			settings.put(Environment.URL, "jdbc:mysql://localhost:3306/rest_api");
 			settings.put(Environment.USER, "root");
 			settings.put(Environment.PASS, "");
 			
@@ -36,6 +37,8 @@ public class SessionUtil {
 			
 			configuration.setProperties(settings);
 			configuration.addAnnotatedClass(Employee.class);
+			configuration.addAnnotatedClass(Book.class);
+
 			
 			ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
 					.applySettings(configuration.getProperties())
